@@ -1,40 +1,43 @@
 """
-Logging functionality for OrganizerBot
+Logging configuration for OrganizerBot
 """
 import logging
-from datetime import datetime
+import sys
 from pathlib import Path
-import queue
+from typing import Optional
+from queue import Queue
 
-# Global queue for GUI messages
-gui_queue = queue.Queue()
+# Create a queue for GUI updates
+gui_queue = Queue()
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
-def log_action(message: str) -> None:
-    """
-    Log an action with timestamp
+def setup_logging(log_file: Optional[str] = None, level: int = logging.INFO):
+    """Setup logging configuration"""
+    # Create formatter
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
     
-    Args:
-        message: The message to log
-    """
-    # Log to console
-    logging.info(message)
+    # Setup console handler
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(formatter)
     
-    # Send to GUI queue
-    try:
-        gui_queue.put_nowait(message)
-    except queue.Full:
-        pass
+    # Setup file handler if log file specified
+    handlers = [console_handler]
+    if log_file:
+        log_path = Path(log_file)
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setFormatter(formatter)
+        handlers.append(file_handler)
     
-    # Also write to a log file
-    log_dir = Path.home() / ".organizerbot" / "logs"
-    log_dir.mkdir(parents=True, exist_ok=True)
+    # Configure root logger
+    logging.basicConfig(
+        level=level,
+        handlers=handlers
+    )
     
-    log_file = log_dir / f"organizerbot_{datetime.now().strftime('%Y%m%d')}.log"
-    with open(log_file, "a") as f:
-        f.write(f"{datetime.now().isoformat()} - {message}\n") 
+def log_action(message: str, level: int = logging.INFO):
+    """Log an action with the specified level"""
+    logger = logging.getLogger("organizerbot")
+    logger.log(level, message) 

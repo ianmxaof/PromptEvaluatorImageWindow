@@ -1,10 +1,43 @@
 """
-Configuration management for OrganizerBot
+Configuration management for PowerCoreAi
 """
 import json
 from pathlib import Path
-from typing import Dict, List
-import os
+from typing import Dict, Any, Optional
+
+class Config:
+    """Configuration class"""
+    def __init__(self):
+        self.config_file = Path.home() / ".powercoreai" / "config.json"
+        self.config_file.parent.mkdir(parents=True, exist_ok=True)
+        self.data = self.load()
+
+    def load(self) -> Dict[str, Any]:
+        """Load configuration from file"""
+        if self.config_file.exists():
+            with open(self.config_file, 'r') as f:
+                return json.load(f)
+        return {}
+
+    def save(self) -> None:
+        """Save configuration to file"""
+        with open(self.config_file, 'w') as f:
+            json.dump(self.data, f, indent=4)
+
+def load_config() -> Dict[str, Any]:
+    """Load configuration"""
+    config_file = Path.home() / ".powercoreai" / "config.json"
+    if config_file.exists():
+        with open(config_file, 'r') as f:
+            return json.load(f)
+    return {}
+
+def save_config(config: Dict[str, Any]) -> None:
+    """Save configuration"""
+    config_file = Path.home() / ".powercoreai" / "config.json"
+    config_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(config_file, 'w') as f:
+        json.dump(config, f, indent=4)
 
 # Define category groups
 CATEGORY_GROUPS = {
@@ -27,7 +60,7 @@ class Config:
     def load(cls) -> 'Config':
         """Load configuration from file"""
         config = cls()
-        config_file = Path.home() / ".organizerbot" / "config.json"
+        config_file = Path.home() / ".powercoreai" / "config.json"
         
         if config_file.exists():
             try:
@@ -43,7 +76,7 @@ class Config:
         
     def save(self):
         """Save configuration to file"""
-        config_file = Path.home() / ".organizerbot" / "config.json"
+        config_file = Path.home() / ".powercoreai" / "config.json"
         config_file.parent.mkdir(parents=True, exist_ok=True)
         
         data = {

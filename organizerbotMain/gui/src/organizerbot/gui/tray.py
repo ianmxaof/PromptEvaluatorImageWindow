@@ -1,5 +1,5 @@
 """
-System tray interface for OrganizerBot
+System tray interface for PowerCoreAi
 """
 import os
 import threading
@@ -61,7 +61,7 @@ class TrayApplication:
             raise FileNotFoundError("Tray icon not found")
 
         image = Image.open(icon_path)
-        self.icon = pystray.Icon("OrganizerBot", image, "OrganizerBot Tray", self.create_menu())
+        self.icon = pystray.Icon("PowerCoreAi", image, "PowerCoreAi Tray", self.create_menu())
         self.icon.menu = self.create_menu()
         self.icon.run()
 
@@ -70,5 +70,5 @@ def run_tray_application() -> None:
     tray_app = TrayApplication()
     tray_thread = threading.Thread(target=tray_app.run, daemon=True)
     tray_thread.start()
-    print("[OrganizerBot Tray Running] You can minimize this terminal.")
+    print("[PowerCoreAi Tray Running] You can minimize this terminal.")
     tray_thread.join() 

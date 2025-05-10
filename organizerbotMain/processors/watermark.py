@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 import os
 
-def add_watermark(input_path, output_path, text="© OrganizerBot", font_size=36):
+def add_watermark(input_path, output_path, text="© PowerCoreAi", font_size=36):
     try:
         image = Image.open(input_path).convert("RGBA")
 

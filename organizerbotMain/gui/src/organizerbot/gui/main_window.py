@@ -1,5 +1,5 @@
 """
-Standalone GUI window for OrganizerBot
+Standalone GUI window for PowerCoreAi
 """
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
@@ -12,7 +12,7 @@ class MainWindow:
     """Main application window"""
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("OrganizerBot")
+        self.root.title("PowerCoreAi")
         self.root.geometry("800x600")
         self.config = load_config()
         

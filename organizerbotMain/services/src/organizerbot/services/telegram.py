@@ -1,5 +1,5 @@
 """
-Enhanced Telegram integration for OrganizerBot
+Enhanced Telegram integration for PowerCoreAi
 """
 import os
 import asyncio
@@ -34,9 +34,12 @@ class TelegramBot:
     async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /start command"""
         await update.message.reply_text(
-            "👋 Welcome to OrganizerBot!\n\n"
-            "I can help you organize and process your images.\n"
-            "Use /help to see available commands."
+            "👋 Welcome to PowerCoreAi!\n\n"
+            "I can help you organize and process your images. Here are some commands:\n"
+            "/help - Show this help message\n"
+            "/process <image> - Process an image\n"
+            "/categorize <image> - Categorize an image\n"
+            "/settings - View your settings"
         )
 
     async def help_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):

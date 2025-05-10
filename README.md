@@ -1,4 +1,4 @@
-# OrganizerBot 🧠
+# PowerCoreAi 🧠
 
 An AI-powered image organization tool that automatically categorizes images using CLIP (Contrastive Language-Image Pre-training) and learns from user feedback.
 
@@ -24,8 +24,8 @@ An AI-powered image organization tool that automatically categorizes images usin
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/OrganizerBot.git
-cd OrganizerBot
+git clone https://github.com/yourusername/PowerCoreAi.git
+cd PowerCoreAi
 ```
 
 2. Install dependencies:
